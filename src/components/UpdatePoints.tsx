@@ -1,6 +1,5 @@
 "use client"
 
-import { updateTeam } from '@/data/Teams';
 import React, { useEffect, useState } from 'react'
 import $ from 'jquery'
 
