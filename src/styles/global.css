@@ -1,0 +1,475 @@
+@import url("https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Itim&family=Playwrite+HU:wght@100..400&family=Sacramento&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Itim";
+}
+
+.main-head {
+    width: 100%;
+    height: 12vh;
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: space-between;
+}
+
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 3%;
+}
+
+#logo {
+    width: 70px;
+    height: 70px;
+    margin: 15px;
+}
+
+#title {
+    font-size: 3rem;
+    color: white;
+}
+
+.navbar {
+    margin-right: 3%;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar ul li {
+    margin: 10px;
+    border-radius: 25px;
+}
+
+.navbar ul li button {
+    height: 62px;
+    width: 150px;
+    font-size: 1.2rem;
+    padding: 3px;
+    border-radius: 25px;
+    background: transparent;
+    border: none;
+    outline: none;
+    transition: all 0.2s linear;
+}
+
+.navbar ul li button:hover {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.navbar ul li:first-child {
+    background-color: rgb(0, 255, 0);
+}
+
+.navbar ul li:first-child button:hover {
+    border: 5px solid rgb(166, 255, 114);
+}
+
+.navbar ul li:nth-child(2) {
+    background-color: rgb(255, 0, 0);
+}
+
+.navbar ul li:nth-child(2) button:hover {
+    border: 5px solid rgb(255, 115, 0);
+}
+
+.navbar ul li:last-child {
+    background-color: rgb(0, 191, 255);
+}
+
+.navbar ul li:last-child button:hover {
+    border: 5px solid rgb(173, 216, 230);
+}
+
+/* LeaderBoard Style */
+
+.table {
+    width: 75%;
+    padding: 20px;
+}
+
+#points-table {
+    width: 100%;
+    transition: all 2s ease;
+    -moz-transition: all;
+    -webkit-transition: all;
+    
+}
+
+#points-table,
+#points-table th,
+#points-table td {
+    border: 2px solid black;
+}
+
+#points-table {
+    height: 30px;
+}
+
+#points-table tr th:nth-child(1) {
+    width: 10%;
+}
+
+#points-table tr th:nth-child(2) {
+    width: 40%;
+}
+
+#points-table tr th:nth-child(3) {
+    width: 10%;
+}
+
+#points-table tr th:nth-child(4) {
+    width: 10%;
+}
+
+#points-table tr th:nth-child(5) {
+    width: 10%;
+}
+
+#points-table tr th:nth-child(6) {
+    width: 10%;
+}
+
+#points-table tr th:nth-child(7) {
+    width: 10%;
+}
+
+/* SideBar */
+
+.sidebar {
+    width: 25%;
+    height: 88vh;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    background-color: rgba(90, 87, 231, .6);
+    border-left: 3px solid black;
+    position: relative;
+}
+
+.sidebar h3 {
+    margin: 5px;
+    font-size: 2rem;
+}
+
+#side-table {
+    width: 80%;
+}
+
+#side-table,
+#side-table th,
+#side-table td {
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+#side-table th:nth-child(1) {
+    width: 20%;
+}
+
+#side-table th:nth-child(2) {
+    width: 80%;
+}
+
+#side-table {
+    height: 30px;
+    background-color: rgb(0, 255, 234);
+    box-shadow: inset 0px 0px 200px black;
+}
+
+#side-table .table-head {
+    background-color: rgb(0, 132, 255);
+}
+
+#side-table tbody tr:nth-child(1) {
+    background-color: #FDBD01;
+}
+
+#side-table tbody tr:nth-child(2) {
+    background-color: #cfcfcf;
+}
+
+#side-table tbody tr:nth-child(3) {
+    background-color: #CE8946;
+}
+
+.extra-actions {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.extra-actions p {
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.1rem;
+    text-decoration: underline;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.extra-actions ol {
+    padding: 5px;
+    font-size: 14px;
+}
+
+.extra-actions .functionality {
+    width: 100%;
+    height: 15vh;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.functionality button {
+    padding: 5px;
+    border: 2px solid black;
+    border-radius: 0px 7px 0px 7px;
+    background-color: springgreen;
+    transition: all 0.2s ease;
+}
+
+.functionality button:hover {
+    cursor: pointer;
+    background-color: rgb(0, 153, 77);
+    font-size: 1.1rem;
+}
+
+/* common */
+
+.table-head {
+    height: 60px;
+    background-color: darkcyan;
+    font-size: 1.3rem;
+    color: lavenderblush;
+}
+
+tr {
+    height: 40px;
+}
+
+tr:nth-child(even) {
+    background-color: powderblue;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: deepskyblue;
+}
+
+td {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* Add Team */
+
+.addTeam,
+.delTeam {
+    height: 25vh;
+    background-image: linear-gradient(yellow, orange);
+    box-shadow: inset 0px 0px 10px orangered;
+    color: black;
+    width: 90%;
+    border-bottom: 3px solid black;
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+    border-radius: 0px 0px 20px 20px;
+    padding: 10px;
+    position: absolute;
+    display: none;
+}
+
+.addTeam form,
+.delTeam form,
+.updatepts form {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.addTeam form label,
+.delTeam form label,
+.updatepts label {
+    font-size: 1.4rem;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.addTeam form input,
+.delTeam form input,
+.updatepts input {
+    height: 40px;
+    width: 80%;
+    border: 2px solid black;
+    border-radius: 7px;
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 5px;
+    margin: 5px;
+}
+
+.submit {
+    margin: 5px;
+    height: 40px;
+    width: 50%;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    background-color: mediumorchid;
+    transition: all 0.1s linear;
+}
+
+.submit:hover {
+    cursor: pointer;
+    background-color: darkorchid;
+}
+
+.updatepts {
+    background-image: linear-gradient(yellow, orange);
+    box-shadow: inset 0px 0px 10px orangered;
+    color: black;
+    width: 90%;
+    border-bottom: 3px solid black;
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+    border-radius: 0px 0px 20px 20px;
+    padding: 10px;
+    position: absolute;
+    display: none;
+}
+
+.cancel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: red;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid black;
+    right: 5px;
+    top: 0px;
+    transition: all 0.1s linear;
+}
+
+.cancel:hover {
+    cursor: pointer;
+    background-color: darkred;
+}
+
+/* congratulations */
+
+.hidden {
+    display: none;
+}
+
+#congrats-message {
+    position: absolute;
+    height: 70vh;
+    width: 70vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: yellow;
+    z-index: 1;
+    border: 3px solid black;
+    box-shadow: 0px 0px 20px yellow,
+                inset 0px 0px 50px white;
+}
+
+.inner-congrats-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+}
+
+.header-message {
+    height: 30%;
+    width: 90%;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    background-color: rgb(255, 255, 128);
+    box-shadow: inset 0px 0px 50px rgb(167, 167, 0);
+}
+.header-message h1 {
+    font-size: 2.5rem;
+}
+
+#medal {
+    height: 65px;
+    width: 65px;
+}
+
+.body-message {
+    height: 50%;
+    width: 90%;
+    margin: 10px;
+    text-align: center;
+}
+
+.body-message h2 {
+    font-size: xx-large;
+    text-shadow: 0px 0px 10px white;
+    text-decoration: underline;
+    margin: 20px;
+}
+
+.body-message p {
+    font-size: x-large;
+    margin: 10px;
+}
+
+#new-tournament {
+    height: 50px;
+    width: 230px;
+    padding: 10px;
+    font-size: large;
+    background-color: rgb(0, 255, 0);
+    border: 2px solid green;
+    border-radius: 20px;
+    transition: all 0.2s linear;
+}
+
+#new-tournament:hover {
+    cursor: pointer;
+    background-color: greenyellow;
+}
+
+
+/* Formatting Apps */
+
+.body {
+    width: 100%;
+    display: flex;
+}
+
+body {
+    background-color: aquamarine;
+}
