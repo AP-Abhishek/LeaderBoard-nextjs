@@ -1,7 +1,10 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: 'LeaderBoard'
+    title: 'LeaderBoard',
+    icons: {
+        icon: '/winner.png'
+    }
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
