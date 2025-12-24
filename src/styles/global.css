@@ -96,6 +96,8 @@
 .table {
     width: 75%;
     padding: 20px;
+    overflow-y: auto;
+    height: 88vh;
 }
 
 #points-table {
@@ -159,8 +161,8 @@
 }
 
 .sidebar h3 {
-    margin: 5px;
-    font-size: 2rem;
+    margin: 4px;
+    font-size: 1.9rem;
 }
 
 #side-table {
@@ -183,7 +185,7 @@
 }
 
 #side-table {
-    height: 30px;
+    height: 25px;
     background-color: rgb(0, 255, 234);
     box-shadow: inset 0px 0px 200px black;
 }
@@ -225,13 +227,13 @@
 
 .extra-actions ol {
     padding: 5px;
-    font-size: 14px;
+    font-size: .9rem;
 }
 
 .extra-actions .functionality {
     width: 100%;
-    height: 15vh;
-    padding: 20px;
+    height: 12vh;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: space-around;

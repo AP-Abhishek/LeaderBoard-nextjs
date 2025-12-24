@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 import $ from 'jquery';
+import { AllTeams } from '@/data/Teams';
 
 interface AddTeamProp {
   onAddTeam: (newTeam: {
@@ -29,6 +30,17 @@ export default function AddTeam({ onAddTeam }: AddTeamProp) {
         theme: "colored"
       });
     } else {
+
+      const teams = AllTeams();
+
+      const exists = teams.filter(team => team.name.toLowerCase() == name.toLowerCase());
+      if (exists.length > 0) {
+        toast.error("Team already exists", {
+          theme: "colored"
+        });
+        return;
+      }
+
       const newTeam = {
         id: nextID,
         name: name,
