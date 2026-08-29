@@ -1,7 +1,9 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import $ from 'jquery';
+import { AllTeams } from '@/data/Teams';
+import CustomDropdown from './CustomDropdown';
 
 interface DeleteTeamProp {
   onDeleteTeam: (name: string) => void;
@@ -15,23 +17,33 @@ export default function DeleteTeam({ onDeleteTeam }: DeleteTeamProp) {
     e.preventDefault();
     onDeleteTeam(name);
     setName("");
-    $('.delTeam').slideUp(1000);
-      $('.cancel').slideUp(1000);
+    $('.delTeam').slideUp(300);
+    $('.cancel').slideUp(300);
   }
 
-  useEffect (() => {
-    $('.cancel').click(function() {
-      $('.delTeam').slideUp(1000);
-      $('.cancel').slideUp(1000);
-    });
-  })
-  
+  const handleCancel = () => {
+    $('.delTeam').slideUp(300);
+    $('.cancel').slideUp(300);
+  }
+
+  const teams = AllTeams();
+  const dropdownOptions = teams.map(team => ({
+    value: team.name,
+    label: team.name
+  }));
+
   return (
     <div className='delTeam'>
       <form onSubmit={handleDelte}>
-        <span className='cancel'>X</span>
-        <label>Enter Team name to Delete: </label>
-        <input type="text" id='delTeamName' value={name} onChange={(e) => { setName(e.target.value) }} />
+        <span className='cancel' onClick={handleCancel}>X</span>
+        <label>Select Team to Delete: </label>
+        <CustomDropdown
+          options={dropdownOptions}
+          value={name}
+          onChange={(val) => setName(val)}
+          placeholder="Select Team"
+          id="delTeamName"
+        />
         <button className='submit'>Delete Team</button>
       </form>
     </div>

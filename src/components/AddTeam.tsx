@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { toast } from 'react-toastify';
 import $ from 'jquery';
 import { AllTeams } from '@/data/Teams';
@@ -25,55 +25,67 @@ export default function AddTeam({ onAddTeam }: AddTeamProp) {
   const handleAddTeam = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (name == "") {
-      toast.error("Invalid name", {
+    const trimmed = name.trim();
+
+    if (trimmed === "") {
+      toast.error("Please enter a valid team name", {
         theme: "colored"
       });
-    } else {
-
-      const teams = AllTeams();
-
-      const exists = teams.filter(team => team.name.toLowerCase() == name.toLowerCase());
-      if (exists.length > 0) {
-        toast.error("Team already exists", {
-          theme: "colored"
-        });
-        return;
-      }
-
-      const newTeam = {
-        id: nextID,
-        name: name,
-        matches: 0,
-        wins: 0,
-        loss: 0,
-        tieBreaker: 0,
-        points: 0
-      }
-      onAddTeam(newTeam);
-      toast.success("Team Created Succesfully", {
-        theme: "colored"
-      });
-      setName("");
-      setNextID(nextID + 1);
-      $(".addTeam").slideUp(1000);
-      $('.cancel').slideUp(1000);
+      return;
     }
+
+    if (trimmed.length > 20) {
+      toast.error("Team name cannot exceed 20 characters", {
+        theme: "colored"
+      });
+      return;
+    }
+
+    const teams = AllTeams();
+    const exists = teams.filter(team => team.name.toLowerCase() === trimmed.toLowerCase());
+    if (exists.length > 0) {
+      toast.error("Team already exists", {
+        theme: "colored"
+      });
+      return;
+    }
+
+    const newTeam = {
+      id: nextID,
+      name: trimmed,
+      matches: 0,
+      wins: 0,
+      loss: 0,
+      tieBreaker: 0,
+      points: 0
+    }
+    onAddTeam(newTeam);
+    toast.success("Team Created Successfully", {
+      theme: "colored"
+    });
+    setName("");
+    setNextID(nextID + 1);
+    $(".addTeam").slideUp(300);
+    $('.cancel').slideUp(300);
   }
 
-  useEffect (() => {
-    $('.cancel').click(function() {
-      $('.addTeam').slideUp(1000);
-      $('.cancel').slideUp(1000);
-    });
-  })
+  const handleCancel = () => {
+    $('.addTeam').slideUp(300);
+    $('.cancel').slideUp(300);
+  }
 
   return (
     <div className='addTeam'>
       <form onSubmit={handleAddTeam}>
-        <span className='cancel'>X</span>
+        <span className='cancel' onClick={handleCancel}>X</span>
         <label>Enter Team Name: </label>
-        <input type="text" id='addedTeam' value={name} onChange={(e) => setName(e.target.value)} />
+        <input 
+          type="text" 
+          id='addedTeam' 
+          maxLength={20} 
+          value={name} 
+          onChange={(e) => setName(e.target.value)} 
+        />
         <button className='submit'>Add New Team</button>
       </form>
     </div>
