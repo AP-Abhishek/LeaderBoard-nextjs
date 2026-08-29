@@ -1,10 +1,63 @@
 'use client';
 
-import React from 'react'
-import { AllTeams } from '@/data/Teams';
+import React, { useLayoutEffect, useRef } from 'react'
 
-export default function PointsTable() {
-    const teams = AllTeams();
+type TeamStats = {
+    id: number,
+    name: string,
+    matches: number,
+    wins: number,
+    loss: number,
+    tieBreaker: number,
+    points: number
+}
+
+interface PointsTableProps {
+    teams: TeamStats[];
+}
+
+export default function PointsTable({ teams }: PointsTableProps) {
+    const prevPositionsRef = useRef<Map<number, number>>(new Map());
+
+    useLayoutEffect(() => {
+        const prevPositions = prevPositionsRef.current;
+
+        teams.forEach((team) => {
+            const el = document.getElementById(`team-row-${team.id}`);
+            if (!el) return;
+
+            const newTop = el.getBoundingClientRect().top;
+            const prevTop = prevPositions.get(team.id);
+
+            if (prevTop !== undefined && Math.abs(prevTop - newTop) > 2) {
+                const deltaY = prevTop - newTop;
+
+                el.style.transform = `translateY(${deltaY}px)`;
+                el.style.transition = 'none';
+                el.classList.add('rank-swap-active');
+
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        el.style.transition = 'transform 0.55s cubic-bezier(0.2, 1, 0.3, 1)';
+                        el.style.transform = '';
+                    });
+                });
+
+                setTimeout(() => {
+                    el.classList.remove('rank-swap-active');
+                }, 700);
+            }
+
+            prevPositions.set(team.id, newTop);
+        });
+
+        const activeIds = new Set(teams.map(t => t.id));
+        for (const id of Array.from(prevPositions.keys())) {
+            if (!activeIds.has(id)) {
+                prevPositions.delete(id);
+            }
+        }
+    }, [teams]);
 
     return (
         <div className="table">
@@ -48,7 +101,7 @@ export default function PointsTable() {
                             </tr>
                         ) : (
                             teams.map((Team, index) => (
-                                <tr key={Team.id}>
+                                <tr key={Team.id} id={`team-row-${Team.id}`} className='table-row-item'>
                                     <td>{index + 1}</td>
                                     <td>{Team.name}</td>
                                     <td>{Team.matches}</td>

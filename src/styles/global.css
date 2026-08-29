@@ -200,14 +200,46 @@ body {
 #points-table {
     width: 100%;
     min-width: 580px;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 2px solid black;
     transition: all 0.3s ease;
 }
 
-#points-table,
+.table-row-item {
+    will-change: transform;
+}
+
+.table-row-item.rank-swap-active {
+    z-index: 10;
+    animation: rankGlowPulse 0.8s ease-in-out;
+}
+
+@keyframes rankGlowPulse {
+    0% {
+        box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.9);
+    }
+    50% {
+        box-shadow: inset 0 0 24px rgba(255, 215, 0, 0.95);
+    }
+    100% {
+        box-shadow: none;
+    }
+}
+
 #points-table th,
 #points-table td {
-    border: 1.5px solid black;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+#points-table th:last-child,
+#points-table td:last-child {
+    border-right: none;
+}
+
+#points-table tbody tr:last-child td {
+    border-bottom: none;
 }
 
 #points-table tr th:nth-child(1) {

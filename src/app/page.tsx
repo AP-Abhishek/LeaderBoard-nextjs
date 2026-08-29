@@ -23,7 +23,7 @@ export default function Home() {
         points: number
     }
 
-    const [Teams, setTeams] = useState(AllTeams());
+    const [Teams, setTeams] = useState<TeamStats[]>(AllTeams().map(t => ({ ...t })));
     const [winPoints, setWinPointsState] = useState(getWinPoints());
     const [activeTab, setActiveTab] = useState<'leaderboard' | 'sidebar'>('leaderboard');
 
@@ -43,21 +43,21 @@ export default function Home() {
 
     const handleAddTeam = (newTeam: TeamStats) => {
         addTeam(newTeam);
-        setTeams([...Teams, newTeam]);
+        setTeams(AllTeams().map(t => ({ ...t })));
     }
 
     const handleDeleteTeam = (name: string) => {
         deleteTeam(name);
-        setTeams(Teams.filter(Team => Team.name != name));
+        setTeams(AllTeams().map(t => ({ ...t })));
     }
 
     const handleUpdateTeam = (winTeam: string, lossTeam: string, tiePtsWin: number, tiePtsLoss: number) => {
         updateTeam(winTeam, lossTeam, tiePtsWin, tiePtsLoss);
-        setTeams([...Teams]);
+        setTeams(AllTeams().map(t => ({ ...t })));
     }
 
     const handleDataImported = () => {
-        setTeams([...AllTeams()]);
+        setTeams(AllTeams().map(t => ({ ...t })));
         setWinPointsState(getWinPoints());
     }
 
@@ -79,7 +79,7 @@ export default function Home() {
                 </button>
             </div>
             <div className={`body mobile-tab-${activeTab}`}>
-                <PointsTable />
+                <PointsTable teams={Teams} />
                 <SideBar
                     onAddTeam={handleAddTeam}
                     onDeleteTeam={handleDeleteTeam}
