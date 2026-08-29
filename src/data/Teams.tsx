@@ -11,6 +11,19 @@ type TeamStats = {
 }
 
 let Teams: TeamStats[] = []
+let winPointsRule: number = 2;
+
+export const getWinPoints = (): number => {
+    return winPointsRule;
+}
+
+export const setWinPoints = (pts: number) => {
+    if (isNaN(pts) || pts < 1) {
+        winPointsRule = 2;
+    } else {
+        winPointsRule = Math.min(999, Math.floor(pts));
+    }
+}
 
 export const addTeam = (Team: TeamStats) => {
     Teams.push({
@@ -68,7 +81,7 @@ export const updateTeam = (
         winningTeam.matches++;
         winningTeam.tieBreaker += winTie;
         winningTeam.wins++;
-        winningTeam.points += 2;
+        winningTeam.points += winPointsRule;
 
         losingTeam.matches++;
         losingTeam.tieBreaker += lossTie;
@@ -100,6 +113,54 @@ export const canEndTournament = (): { allowed: boolean; message?: string } => {
         return { allowed: false, message: "Cannot end tournament before playing any matches." };
     }
     return { allowed: true };
+}
+
+export const exportTournamentData = () => {
+    const data = {
+        winPoints: winPointsRule,
+        teams: Teams
+    };
+    const jsonString = JSON.stringify(data, null, 2);
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'leaderboard_data.json';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    toast.success("Tournament data exported successfully.", { theme: 'colored' });
+}
+
+export const importTournamentData = (parsedData: any): boolean => {
+    if (!parsedData || typeof parsedData !== 'object') {
+        toast.error("Invalid JSON data format.", { theme: 'colored' });
+        return false;
+    }
+
+    if (Array.isArray(parsedData.teams)) {
+        Teams = parsedData.teams;
+    } else if (Array.isArray(parsedData)) {
+        Teams = parsedData;
+    } else {
+        toast.error("JSON file does not contain valid teams array.", { theme: 'colored' });
+        return false;
+    }
+
+    if (typeof parsedData.winPoints === 'number' && parsedData.winPoints > 0) {
+        winPointsRule = Math.floor(parsedData.winPoints);
+    }
+
+    Teams.sort((a: TeamStats, b: TeamStats): number => {
+        if (a.points !== b.points) {
+            return b.points - a.points;
+        }
+        return b.tieBreaker - a.tieBreaker;
+    });
+
+    toast.success("Tournament data imported successfully.", { theme: 'colored' });
+    return true;
 }
 
 export const AllTeams = (): TeamStats[] => {

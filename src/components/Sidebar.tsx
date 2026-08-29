@@ -20,9 +20,10 @@ interface SideBarProp {
   }) => void;
   onDeleteTeam: (name: string) => void;
   onUpdateTeam: (winTeam: string, lossTeam: string, tiePtsWin: number, tiePtsLoss: number) => void;
+  winPoints: number;
 }
 
-export default function SideBar({ onAddTeam, onDeleteTeam, onUpdateTeam }: SideBarProp) {
+export default function SideBar({ onAddTeam, onDeleteTeam, onUpdateTeam, winPoints }: SideBarProp) {
 
   const endTournament = () => {
     const check = canEndTournament();
@@ -68,13 +69,14 @@ export default function SideBar({ onAddTeam, onDeleteTeam, onUpdateTeam }: SideB
           Rules & Guidelines
         </p>
         <ol>
-          <li>Add teams to begin (+2 points awarded per win).</li>
+          <li>Add teams to begin (+{winPoints} pts awarded per win).</li>
           <li>Select winning and losing teams to update scores.</li>
           <li>Teams are automatically ranked by Points, then Tie-Breakers.</li>
-          <li>Team names are limited to a max of 20 characters and must be unique.</li>
+          <li>Team names are limited to 20 characters and must be unique.</li>
           <li>Winning and losing teams cannot be the same team.</li>
           <li>Tie-breaker points are limited to a max of 7 digits.</li>
-          <li>Live Tournament Safety: Refreshing or reloading the page will lose all data.</li>
+          <li>Use Settings to customize Win Points or Export/Import JSON data.</li>
+          <li>Live Safety: Refreshing or reloading the page will lose active data.</li>
           <li>Click &apos;End Tournament&apos; when all matches finish to crown the winner.</li>
         </ol>
         <p>

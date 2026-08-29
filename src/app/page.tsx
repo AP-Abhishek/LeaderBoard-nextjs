@@ -4,10 +4,11 @@ import React, { useState, useEffect } from 'react'
 import Heading from '@/components/Heading'
 import PointsTable from '@/components/PointsTable'
 import SideBar from '@/components/Sidebar'
+import Settings from '@/components/Settings'
 import { ToastContainer, Bounce } from 'react-toastify'
 import "react-toastify/ReactToastify.css"
 import '@/styles/global.css'
-import { AllTeams, addTeam, deleteTeam, updateTeam } from '@/data/Teams'
+import { AllTeams, addTeam, deleteTeam, updateTeam, getWinPoints } from '@/data/Teams'
 import Congrats from '@/components/Congrats'
 
 export default function Home() {
@@ -23,6 +24,7 @@ export default function Home() {
     }
 
     const [Teams, setTeams] = useState(AllTeams());
+    const [winPoints, setWinPointsState] = useState(getWinPoints());
     const [activeTab, setActiveTab] = useState<'leaderboard' | 'sidebar'>('leaderboard');
 
     useEffect(() => {
@@ -54,6 +56,11 @@ export default function Home() {
         setTeams([...Teams]);
     }
 
+    const handleDataImported = () => {
+        setTeams([...AllTeams()]);
+        setWinPointsState(getWinPoints());
+    }
+
     return (
         <>
             <Heading />
@@ -77,8 +84,13 @@ export default function Home() {
                     onAddTeam={handleAddTeam}
                     onDeleteTeam={handleDeleteTeam}
                     onUpdateTeam={handleUpdateTeam}
+                    winPoints={winPoints}
                 />
             </div>
+            <Settings 
+                onDataImported={handleDataImported} 
+                onWinPointsChange={(pts) => setWinPointsState(pts)}
+            />
             <Congrats />
             <ToastContainer
                 position="bottom-right"

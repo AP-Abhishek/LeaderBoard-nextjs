@@ -98,33 +98,46 @@ body {
     transform: scale(0.95);
 }
 
-.navbar ul li:first-child {
+.navbar ul li.nav-add {
     background-color: rgb(0, 255, 0);
 }
 
-.navbar ul li:first-child button:hover {
+.navbar ul li.nav-add button:hover {
     border: 3px solid rgb(166, 255, 114);
 }
 
-.navbar ul li:nth-child(2) {
+.navbar ul li.nav-del {
     background-color: rgb(255, 0, 0);
     color: white;
 }
 
-.navbar ul li:nth-child(2) button {
+.navbar ul li.nav-del button {
     color: white;
 }
 
-.navbar ul li:nth-child(2) button:hover {
+.navbar ul li.nav-del button:hover {
     border: 3px solid rgb(255, 115, 0);
 }
 
-.navbar ul li:last-child {
+.navbar ul li.nav-update {
     background-color: rgb(0, 191, 255);
 }
 
-.navbar ul li:last-child button:hover {
+.navbar ul li.nav-update button:hover {
     border: 3px solid rgb(173, 216, 230);
+}
+
+.navbar ul li.nav-settings {
+    background-color: rgb(186, 85, 211);
+    color: white;
+}
+
+.navbar ul li.nav-settings button {
+    color: white;
+}
+
+.navbar ul li.nav-settings button:hover {
+    border: 3px solid rgb(221, 160, 221);
 }
 
 .mobile-tabs {
@@ -390,7 +403,8 @@ td {
 
 .addTeam,
 .delTeam,
-.updatepts {
+.updatepts,
+.settings {
     position: absolute;
     top: 0;
     left: 5%;
@@ -410,7 +424,8 @@ td {
 
 .addTeam form,
 .delTeam form,
-.updatepts form {
+.updatepts form,
+.settings form {
     width: 100%;
     display: flex;
     align-items: center;
@@ -421,7 +436,8 @@ td {
 
 .addTeam form label,
 .delTeam form label,
-.updatepts label {
+.updatepts label,
+.settings label {
     font-size: 1.05rem;
     font-weight: bold;
     text-align: center;
@@ -434,7 +450,8 @@ td {
 .delTeam form input,
 .delTeam form select,
 .updatepts input,
-.updatepts select {
+.updatepts select,
+.settings input {
     height: 38px;
     width: 88%;
     border: 1.5px solid black;
@@ -444,6 +461,58 @@ td {
     padding: 4px 8px;
     margin: 5px 0;
     background-color: rgba(255, 255, 255, 0.95);
+}
+
+.settings h3 {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.settings-data-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1.5px dashed black;
+}
+
+.export-btn {
+    background-color: deepskyblue !important;
+}
+
+.export-btn:hover {
+    background-color: #0099cc !important;
+}
+
+.import-label {
+    margin-top: 12px;
+    height: 40px;
+    width: 70%;
+    border: 2px solid black;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: springgreen;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.import-label:hover {
+    background-color: rgb(0, 153, 77);
+    color: white;
+}
+
+.import-label:active {
+    transform: scale(0.96);
 }
 
 .custom-dropdown-container {
@@ -724,16 +793,20 @@ td {
         border: 2.5px solid transparent;
     }
 
-    .navbar ul li:first-child button:hover {
+    .navbar ul li.nav-add button:hover {
         border: 2.5px solid rgb(166, 255, 114);
     }
 
-    .navbar ul li:nth-child(2) button:hover {
+    .navbar ul li.nav-del button:hover {
         border: 2.5px solid rgb(255, 115, 0);
     }
 
-    .navbar ul li:last-child button:hover {
+    .navbar ul li.nav-update button:hover {
         border: 2.5px solid rgb(173, 216, 230);
+    }
+
+    .navbar ul li.nav-settings button:hover {
+        border: 2.5px solid rgb(221, 160, 221);
     }
 
     .mobile-tabs {
@@ -828,7 +901,8 @@ td {
 
     .body.mobile-tab-leaderboard .addTeam,
     .body.mobile-tab-leaderboard .delTeam,
-    .body.mobile-tab-leaderboard .updatepts {
+    .body.mobile-tab-leaderboard .updatepts,
+    .body.mobile-tab-leaderboard .settings {
         pointer-events: auto;
         position: absolute;
         top: 0;
