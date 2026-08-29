@@ -1,41 +1,67 @@
 @import url("https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Itim&family=Playwrite+HU:wght@100..400&family=Sacramento&display=swap");
 
-* {
+*, input, button, select, textarea {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Itim";
+    font-family: inherit;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+html, body {
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
+    max-height: 100svh;
+    overflow: hidden;
+    background-color: aquamarine;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
 }
 
 .main-head {
     width: 100%;
-    height: 12vh;
+    height: 60px;
+    flex-shrink: 0;
     display: flex;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.85);
     justify-content: space-between;
+    padding: 0 16px;
 }
 
 .head {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 3%;
 }
 
 #logo {
-    width: 70px;
-    height: 70px;
-    margin: 15px;
+    width: 38px;
+    height: 38px;
+    margin-right: 8px;
 }
 
 #title {
-    font-size: 3rem;
+    font-size: 1.6rem;
     color: white;
 }
 
 .navbar {
-    margin-right: 3%;
+    margin: 0;
 }
 
 .navbar ul {
@@ -43,28 +69,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 8px;
 }
 
 .navbar ul li {
-    margin: 10px;
-    border-radius: 25px;
+    border-radius: 16px;
 }
 
 .navbar ul li button {
-    height: 62px;
-    width: 150px;
-    font-size: 1.2rem;
-    padding: 3px;
-    border-radius: 25px;
+    height: 36px;
+    width: 90px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 2px 4px;
+    border-radius: 16px;
     background: transparent;
-    border: none;
+    border: 3px solid transparent;
     outline: none;
-    transition: all 0.2s linear;
+    transition: all 0.15s ease-in-out;
+    cursor: pointer;
 }
 
 .navbar ul li button:hover {
-    cursor: pointer;
-    font-weight: bold;
+    transform: scale(1.03);
+}
+
+.navbar ul li button:active {
+    transform: scale(0.95);
 }
 
 .navbar ul li:first-child {
@@ -72,15 +103,20 @@
 }
 
 .navbar ul li:first-child button:hover {
-    border: 5px solid rgb(166, 255, 114);
+    border: 3px solid rgb(166, 255, 114);
 }
 
 .navbar ul li:nth-child(2) {
     background-color: rgb(255, 0, 0);
+    color: white;
+}
+
+.navbar ul li:nth-child(2) button {
+    color: white;
 }
 
 .navbar ul li:nth-child(2) button:hover {
-    border: 5px solid rgb(255, 115, 0);
+    border: 3px solid rgb(255, 115, 0);
 }
 
 .navbar ul li:last-child {
@@ -88,42 +124,85 @@
 }
 
 .navbar ul li:last-child button:hover {
-    border: 5px solid rgb(173, 216, 230);
+    border: 3px solid rgb(173, 216, 230);
 }
 
-/* LeaderBoard Style */
+.mobile-tabs {
+    display: none;
+}
+
+.body {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    overflow: hidden;
+}
 
 .table {
     width: 75%;
-    padding: 20px;
+    height: 100%;
+    padding: 12px;
     overflow-y: auto;
-    height: 88vh;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: darkcyan rgba(0, 0, 0, 0.15);
+}
+
+.table::-webkit-scrollbar,
+.sidebar::-webkit-scrollbar,
+#congrats-message::-webkit-scrollbar,
+.addTeam::-webkit-scrollbar,
+.delTeam::-webkit-scrollbar,
+.updatepts::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.table::-webkit-scrollbar-track,
+.sidebar::-webkit-scrollbar-track,
+#congrats-message::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+}
+
+.table::-webkit-scrollbar-thumb,
+.sidebar::-webkit-scrollbar-thumb,
+#congrats-message::-webkit-scrollbar-thumb {
+    background: darkcyan;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.table::-webkit-scrollbar-thumb:hover,
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: #005b5c;
+}
+
+.sidebar, #congrats-message {
+    scrollbar-width: thin;
+    scrollbar-color: darkcyan rgba(0, 0, 0, 0.15);
 }
 
 #points-table {
     width: 100%;
-    transition: all 2s ease;
-    -moz-transition: all;
-    -webkit-transition: all;
-    
+    min-width: 580px;
+    border-collapse: collapse;
+    transition: all 0.3s ease;
 }
 
 #points-table,
 #points-table th,
 #points-table td {
-    border: 2px solid black;
-}
-
-#points-table {
-    height: 30px;
+    border: 1.5px solid black;
 }
 
 #points-table tr th:nth-child(1) {
-    width: 10%;
+    width: 8%;
 }
 
 #points-table tr th:nth-child(2) {
-    width: 40%;
+    width: 42%;
 }
 
 #points-table tr th:nth-child(3) {
@@ -146,70 +225,67 @@
     width: 10%;
 }
 
-/* SideBar */
-
 .sidebar {
     width: 25%;
-    height: 88vh;
+    height: 100%;
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     flex-direction: column;
     background-color: rgba(90, 87, 231, .6);
-    border-left: 3px solid black;
+    border-left: 2px solid black;
     position: relative;
+    padding: 10px;
+    overflow-y: auto;
 }
 
 .sidebar h3 {
-    margin: 4px;
-    font-size: 1.9rem;
+    margin: 2px;
+    font-size: 1.3rem;
 }
 
-#side-table {
-    width: 80%;
-}
-
-#side-table,
-#side-table th,
-#side-table td {
-    border: 2px solid black;
-    border-radius: 5px;
-}
-
-#side-table th:nth-child(1) {
-    width: 20%;
-}
-
-#side-table th:nth-child(2) {
-    width: 80%;
-}
-
-#side-table {
-    height: 25px;
+.overview-card {
+    width: 90%;
     background-color: rgb(0, 255, 234);
-    box-shadow: inset 0px 0px 200px black;
+    border: 1.5px solid black;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin: 8px 0;
+    box-shadow: inset 0px 0px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
-#side-table .table-head {
-    background-color: rgb(0, 132, 255);
+.overview-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.88rem;
 }
 
-#side-table tbody tr:nth-child(1) {
-    background-color: #FDBD01;
+.overview-label {
+    font-weight: bold;
+    color: black;
 }
 
-#side-table tbody tr:nth-child(2) {
-    background-color: #cfcfcf;
+.overview-value {
+    font-weight: bold;
+    color: darkcyan;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid black;
 }
 
-#side-table tbody tr:nth-child(3) {
-    background-color: #CE8946;
+.overview-value.leader-name {
+    color: #000;
+    background: yellow;
 }
 
 .extra-actions {
     width: 100%;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -219,51 +295,53 @@
 .extra-actions p {
     font-weight: bold;
     text-align: center;
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     text-decoration: underline;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 6px 0;
 }
 
 .extra-actions ol {
-    padding: 5px;
-    font-size: .9rem;
+    padding-left: 18px;
+    font-size: 0.82rem;
+    line-height: 1.3;
 }
 
 .extra-actions .functionality {
     width: 100%;
-    height: 12vh;
-    padding: 10px;
+    padding: 8px 0;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 .functionality button {
-    padding: 5px;
+    padding: 6px 14px;
+    font-size: 0.9rem;
+    font-weight: bold;
     border: 2px solid black;
-    border-radius: 0px 7px 0px 7px;
+    border-radius: 0px 8px 0px 8px;
     background-color: springgreen;
-    transition: all 0.2s ease;
+    transition: all 0.15s ease;
+    cursor: pointer;
 }
 
 .functionality button:hover {
-    cursor: pointer;
     background-color: rgb(0, 153, 77);
-    font-size: 1.1rem;
 }
 
-/* common */
+.functionality button:active {
+    transform: scale(0.95);
+}
 
 .table-head {
-    height: 60px;
+    height: 38px;
     background-color: darkcyan;
-    font-size: 1.3rem;
+    font-size: 1rem;
     color: lavenderblush;
 }
 
 tr {
-    height: 40px;
+    height: 30px;
 }
 
 tr:nth-child(even) {
@@ -277,31 +355,62 @@ tbody tr:nth-child(odd) {
 td {
     text-align: center;
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
 }
 
-/* Add Team */
+.empty-cell {
+    padding: 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+    background-color: powderblue !important;
+}
+
+@keyframes modalSlideDownIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-15px) scale(0.97);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes popupPopIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -45%) scale(0.88);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
 
 .addTeam,
-.delTeam {
-    height: 25vh;
-    background-image: linear-gradient(yellow, orange);
-    box-shadow: inset 0px 0px 10px orangered;
-    color: black;
-    width: 90%;
-    border-bottom: 3px solid black;
-    border-left: 3px solid black;
-    border-right: 3px solid black;
-    border-radius: 0px 0px 20px 20px;
-    padding: 10px;
+.delTeam,
+.updatepts {
     position: absolute;
+    top: 0;
+    left: 5%;
+    width: 90%;
+    background-image: linear-gradient(yellow, orange);
+    box-shadow: inset 0px 0px 12px orangered;
+    color: black;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    border-radius: 0px 0px 16px 16px;
+    padding: 20px 16px;
+    z-index: 100;
     display: none;
+    animation: modalSlideDownIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .addTeam form,
 .delTeam form,
 .updatepts form {
-    height: 100%;
     width: 100%;
     display: flex;
     align-items: center;
@@ -313,93 +422,188 @@ td {
 .addTeam form label,
 .delTeam form label,
 .updatepts label {
-    font-size: 1.4rem;
+    font-size: 1.05rem;
+    font-weight: bold;
     text-align: center;
-    margin-top: 15px;
+    margin-top: 10px;
     margin-bottom: 5px;
 }
 
 .addTeam form input,
+.addTeam form select,
 .delTeam form input,
-.updatepts input {
-    height: 40px;
-    width: 80%;
-    border: 2px solid black;
-    border-radius: 7px;
+.delTeam form select,
+.updatepts input,
+.updatepts select {
+    height: 38px;
+    width: 88%;
+    border: 1.5px solid black;
+    border-radius: 8px;
     text-align: center;
-    font-size: 1.2rem;
-    padding: 5px;
-    margin: 5px;
+    font-size: 0.98rem;
+    padding: 4px 8px;
+    margin: 5px 0;
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+.custom-dropdown-container {
+    position: relative;
+    width: 88%;
+    margin: 5px 0;
+}
+
+.custom-dropdown-header {
+    height: 38px;
+    width: 100%;
+    border: 1.5px solid black;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    font-size: 0.98rem;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.15s ease;
+}
+
+.custom-dropdown-header:active {
+    transform: scale(0.98);
+}
+
+.custom-dropdown-header.open {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.dropdown-arrow {
+    font-size: 0.75rem;
+    margin-left: 5px;
+    display: inline-block;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.custom-dropdown-header.open .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.custom-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 160px;
+    overflow-y: auto;
+    background-color: white;
+    border: 1.5px solid black;
+    border-top: none;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    z-index: 50;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px) scaleY(0.95);
+    transform-origin: top center;
+    transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s;
+}
+
+.custom-dropdown-menu.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scaleY(1);
+}
+
+.custom-dropdown-item {
+    padding: 8px 12px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.1s ease;
+}
+
+.custom-dropdown-item:hover {
+    background-color: powderblue;
+}
+
+.custom-dropdown-item.selected {
+    background-color: deepskyblue;
+    color: white;
 }
 
 .submit {
-    margin: 5px;
+    margin-top: 12px;
     height: 40px;
-    width: 50%;
+    width: 70%;
     border: 2px solid black;
-    border-radius: 5px;
-    font-size: 1.1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
     background-color: mediumorchid;
-    transition: all 0.1s linear;
+    transition: all 0.15s ease-in-out;
+    cursor: pointer;
 }
 
 .submit:hover {
-    cursor: pointer;
     background-color: darkorchid;
+    color: white;
 }
 
-.updatepts {
-    background-image: linear-gradient(yellow, orange);
-    box-shadow: inset 0px 0px 10px orangered;
-    color: black;
-    width: 90%;
-    border-bottom: 3px solid black;
-    border-left: 3px solid black;
-    border-right: 3px solid black;
-    border-radius: 0px 0px 20px 20px;
-    padding: 10px;
-    position: absolute;
-    display: none;
+.submit:active {
+    transform: scale(0.96);
 }
 
 .cancel {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    background-color: red;
-    height: 20px;
-    width: 20px;
+    background-color: #ff1744;
+    color: white;
+    font-weight: bold;
+    font-size: 0.8rem;
+    height: 22px;
+    width: 22px;
     position: absolute;
     border-radius: 50%;
-    border: 2px solid black;
-    right: 5px;
-    top: 0px;
-    transition: all 0.1s linear;
+    border: 1.5px solid black;
+    right: 4px;
+    top: 4px;
+    transition: all 0.15s ease-in-out;
+    cursor: pointer;
 }
 
 .cancel:hover {
-    cursor: pointer;
     background-color: darkred;
 }
 
-/* congratulations */
+.cancel:active {
+    transform: scale(0.88);
+}
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 #congrats-message {
-    position: absolute;
-    height: 70vh;
-    width: 70vw;
+    position: fixed;
+    height: auto;
+    max-height: 85vh;
+    width: 88vw;
+    max-width: 450px;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     background-color: yellow;
-    z-index: 1;
+    z-index: 2000;
     border: 3px solid black;
-    box-shadow: 0px 0px 20px yellow,
-                inset 0px 0px 50px white;
+    box-shadow: 0px 0px 30px yellow, inset 0px 0px 40px white;
+    border-radius: 14px;
+    padding: 14px;
+    overflow-y: auto;
+    animation: popupPopIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 .inner-congrats-message {
@@ -412,66 +616,309 @@ td {
 }
 
 .header-message {
-    height: 30%;
-    width: 90%;
+    width: 100%;
     text-align: center;
     padding: 10px;
-    margin: 10px;
+    margin-bottom: 10px;
     background-color: rgb(255, 255, 128);
-    box-shadow: inset 0px 0px 50px rgb(167, 167, 0);
+    box-shadow: inset 0px 0px 30px rgb(167, 167, 0);
+    border-radius: 8px;
 }
+
 .header-message h1 {
-    font-size: 2.5rem;
+    font-size: 1.6rem;
 }
 
 #medal {
-    height: 65px;
-    width: 65px;
+    height: 48px;
+    width: 48px;
 }
 
 .body-message {
-    height: 50%;
-    width: 90%;
-    margin: 10px;
+    width: 100%;
     text-align: center;
 }
 
 .body-message h2 {
-    font-size: xx-large;
+    font-size: 1.4rem;
     text-shadow: 0px 0px 10px white;
     text-decoration: underline;
-    margin: 20px;
+    margin: 10px 0;
 }
 
 .body-message p {
-    font-size: x-large;
-    margin: 10px;
+    font-size: 0.95rem;
+    margin: 6px 0;
 }
 
 #new-tournament {
-    height: 50px;
-    width: 230px;
-    padding: 10px;
-    font-size: large;
+    height: 40px;
+    width: 75%;
+    max-width: 200px;
+    padding: 6px;
+    font-size: 0.95rem;
+    font-weight: bold;
     background-color: rgb(0, 255, 0);
     border: 2px solid green;
-    border-radius: 20px;
-    transition: all 0.2s linear;
+    border-radius: 16px;
+    margin-top: 10px;
+    transition: all 0.15s ease-in-out;
+    cursor: pointer;
 }
 
 #new-tournament:hover {
-    cursor: pointer;
     background-color: greenyellow;
 }
 
-
-/* Formatting Apps */
-
-.body {
-    width: 100%;
-    display: flex;
+#new-tournament:active {
+    transform: scale(0.95);
 }
 
-body {
-    background-color: aquamarine;
+.desktop-text {
+    display: inline;
+}
+
+.mobile-text {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .desktop-text {
+        display: none;
+    }
+
+    .mobile-text {
+        display: inline;
+    }
+
+    .main-head {
+        height: 50px;
+        padding: 0 10px;
+    }
+
+    #title {
+        font-size: 1.15rem;
+    }
+
+    #logo {
+        width: 28px;
+        height: 28px;
+        margin-right: 4px;
+    }
+
+    .navbar ul {
+        gap: 5px;
+    }
+
+    .navbar ul li {
+        border-radius: 14px;
+    }
+
+    .navbar ul li button {
+        height: 34px;
+        min-width: 60px;
+        width: auto;
+        font-size: 0.82rem;
+        padding: 2px 8px;
+        border-radius: 14px;
+        border: 2.5px solid transparent;
+    }
+
+    .navbar ul li:first-child button:hover {
+        border: 2.5px solid rgb(166, 255, 114);
+    }
+
+    .navbar ul li:nth-child(2) button:hover {
+        border: 2.5px solid rgb(255, 115, 0);
+    }
+
+    .navbar ul li:last-child button:hover {
+        border: 2.5px solid rgb(173, 216, 230);
+    }
+
+    .mobile-tabs {
+        display: flex;
+        width: 100%;
+        height: 42px;
+        background-color: rgba(0, 0, 0, 0.9);
+        padding: 4px 6px;
+        gap: 6px;
+    }
+
+    .tab-btn {
+        flex: 1;
+        height: 100%;
+        border: none;
+        border-radius: 14px;
+        font-weight: bold;
+        font-size: 0.85rem;
+        background: rgba(255, 255, 255, 0.15);
+        color: #ddd;
+        cursor: pointer;
+        transition: all 0.15s ease-in-out;
+    }
+
+    .tab-btn.active {
+        background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+        color: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .tab-btn:active {
+        transform: scale(0.95);
+    }
+
+    .submit {
+        height: 42px;
+        width: 80%;
+        font-size: 1.02rem;
+        border-radius: 8px;
+    }
+
+    .functionality button {
+        padding: 8px 18px;
+        font-size: 0.92rem;
+        border-radius: 0px 10px 0px 10px;
+    }
+
+    #new-tournament {
+        height: 42px;
+        width: 80%;
+        font-size: 1rem;
+        border-radius: 14px;
+    }
+
+    .body {
+        height: calc(100vh - 92px);
+        height: calc(100svh - 92px);
+        display: flex;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .body.mobile-tab-leaderboard .table {
+        display: block;
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: auto;
+        padding: 6px;
+    }
+
+    .body.mobile-tab-leaderboard .sidebar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 0;
+        overflow: visible;
+        pointer-events: none;
+        border: none;
+        background: transparent;
+        padding: 0;
+    }
+
+    .body.mobile-tab-leaderboard .sidebar>h3,
+    .body.mobile-tab-leaderboard .sidebar>#side-table,
+    .body.mobile-tab-leaderboard .sidebar>.overview-card,
+    .body.mobile-tab-leaderboard .sidebar>.extra-actions {
+        display: none !important;
+    }
+
+    .body.mobile-tab-leaderboard .addTeam,
+    .body.mobile-tab-leaderboard .delTeam,
+    .body.mobile-tab-leaderboard .updatepts {
+        pointer-events: auto;
+        position: absolute;
+        top: 0;
+        left: 5%;
+        width: 90%;
+        z-index: 100;
+    }
+
+    .body.mobile-tab-sidebar .table {
+        display: none !important;
+    }
+
+    .body.mobile-tab-sidebar .sidebar {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        border-left: none;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: column;
+        background-color: rgba(90, 87, 231, .6);
+        pointer-events: auto;
+    }
+
+    .body.mobile-tab-sidebar .sidebar>h3,
+    .body.mobile-tab-sidebar .sidebar>#side-table,
+    .body.mobile-tab-sidebar .sidebar>.overview-card,
+    .body.mobile-tab-sidebar .sidebar>.extra-actions {
+        display: flex !important;
+    }
+
+    #points-table {
+        min-width: 100%;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    #points-table thead th {
+        position: sticky;
+        top: 0;
+        background-color: darkcyan;
+        z-index: 5;
+    }
+
+    #points-table tr th:nth-child(1) { width: 12%; }
+    #points-table tr th:nth-child(2) { width: 34%; }
+    #points-table tr th:nth-child(3) { width: 10.8%; }
+    #points-table tr th:nth-child(4) { width: 10.8%; }
+    #points-table tr th:nth-child(5) { width: 10.8%; }
+    #points-table tr th:nth-child(6) { width: 10.8%; }
+    #points-table tr th:nth-child(7) { width: 10.8%; }
+
+    .table-head {
+        height: 32px;
+        font-size: 0.85rem;
+    }
+
+    tr {
+        height: 28px;
+    }
+
+    td {
+        font-size: 0.8rem;
+        padding: 3px 2px;
+        word-break: break-word;
+    }
+
+    .Toastify__toast-container {
+        width: 88vw !important;
+        left: 6% !important;
+        bottom: 12px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .Toastify__toast {
+        min-height: 42px !important;
+        padding: 8px 12px !important;
+        font-size: 0.82rem !important;
+        border-radius: 8px !important;
+        margin-bottom: 6px !important;
+    }
+
+    .Toastify__toast-body {
+        padding: 0 !important;
+        margin: 0 !important;
+        font-size: 0.82rem !important;
+        font-weight: bold !important;
+    }
 }

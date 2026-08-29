@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Heading from '@/components/Heading'
 import PointsTable from '@/components/PointsTable'
 import SideBar from '@/components/Sidebar'
@@ -23,6 +23,21 @@ export default function Home() {
     }
 
     const [Teams, setTeams] = useState(AllTeams());
+    const [activeTab, setActiveTab] = useState<'leaderboard' | 'sidebar'>('leaderboard');
+
+    useEffect(() => {
+        const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+            if (Teams.length > 0) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [Teams]);
 
     const handleAddTeam = (newTeam: TeamStats) => {
         addTeam(newTeam);
@@ -42,7 +57,21 @@ export default function Home() {
     return (
         <>
             <Heading />
-            <div className="body">
+            <div className="mobile-tabs">
+                <button
+                    className={activeTab === 'leaderboard' ? 'tab-btn active' : 'tab-btn'}
+                    onClick={() => setActiveTab('leaderboard')}
+                >
+                    Leaderboard
+                </button>
+                <button
+                    className={activeTab === 'sidebar' ? 'tab-btn active' : 'tab-btn'}
+                    onClick={() => setActiveTab('sidebar')}
+                >
+                    Rules & Overview
+                </button>
+            </div>
+            <div className={`body mobile-tab-${activeTab}`}>
                 <PointsTable />
                 <SideBar
                     onAddTeam={handleAddTeam}
@@ -53,7 +82,7 @@ export default function Home() {
             <Congrats />
             <ToastContainer
                 position="bottom-right"
-                autoClose={5000}
+                autoClose={3000}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick
@@ -67,4 +96,3 @@ export default function Home() {
         </>
     )
 }
-

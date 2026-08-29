@@ -5,8 +5,8 @@ import AddTeam from './AddTeam';
 import DeleteTeam from './DeleteTeam';
 import UpdatePoints from './UpdatePoints';
 import JSConfetti from 'js-confetti';
-
-import { AllTeams } from '@/data/Teams';
+import { toast } from 'react-toastify';
+import { AllTeams, canEndTournament } from '@/data/Teams';
 
 interface SideBarProp {
   onAddTeam: (newTeam: {
@@ -22,56 +22,63 @@ interface SideBarProp {
   onUpdateTeam: (winTeam: string, lossTeam: string, tiePtsWin: number, tiePtsLoss: number) => void;
 }
 
-const endTournament = () => {
-  const msg = document.getElementById('congrats-message');
-  msg?.classList.remove('hidden');
-  const confetti = new JSConfetti();
-  confetti.addConfetti({
-    confettiRadius: 7,
-    confettiNumber: 550
-  });
-}
-
 export default function SideBar({ onAddTeam, onDeleteTeam, onUpdateTeam }: SideBarProp) {
 
-  let idx = 1;
+  const endTournament = () => {
+    const check = canEndTournament();
+    if (!check.allowed) {
+      toast.error(check.message, {
+        theme: 'colored'
+      });
+      return;
+    }
+
+    const msg = document.getElementById('congrats-message');
+    msg?.classList.remove('hidden');
+    const confetti = new JSConfetti();
+    confetti.addConfetti({
+      confettiRadius: 7,
+      confettiNumber: 550
+    });
+  }
+
+  const teams = AllTeams();
+  const totalMatches = Math.floor(teams.reduce((acc, t) => acc + t.matches, 0) / 2);
+  const leader = teams.length > 0 ? teams[0] : null;
 
   return (
     <div className='sidebar'>
-      <h3>Top 3</h3>
-      <table id='side-table'>
-        <thead>
-          <tr className='table-head'>
-            <th>Rank</th>
-            <th>Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            AllTeams().slice(0, 3).map((Team) => (
-              <tr key={Team.id}>
-                <th>{idx++}</th>
-                <th>{Team.name}</th>
-              </tr>
-            ))
-          }
-        </tbody>
-      </table>
+      <h3>Tournament Overview</h3>
+      <div className="overview-card">
+        <div className="overview-row">
+          <span className="overview-label">Total Teams:</span>
+          <span className="overview-value">{teams.length}</span>
+        </div>
+        <div className="overview-row">
+          <span className="overview-label">Matches Played:</span>
+          <span className="overview-value">{totalMatches}</span>
+        </div>
+        <div className="overview-row">
+          <span className="overview-label">Current Leader:</span>
+          <span className="overview-value leader-name">{leader ? `${leader.name} (${leader.points} pts)` : 'None'}</span>
+        </div>
+      </div>
       <div className="extra-actions">
         <p>
-          LeaderBoard
+          Rules & Guidelines
         </p>
         <ol>
-          <li>Add New Teams to begin the Tournament.</li>
-          <li>Delete Team if not required.</li>
-          <li>Update Points after every match.</li>
-          <li>By Default it adds 2 points on wins.</li>
-          <li>Editing is not allowed.</li>
-          <li>Click Qualifiers to element disqualified Teams</li>
-          <li>Click End to end the Tournament.</li>
+          <li>Add teams to begin (+2 points awarded per win).</li>
+          <li>Select winning and losing teams to update scores.</li>
+          <li>Teams are automatically ranked by Points, then Tie-Breakers.</li>
+          <li>Team names are limited to a max of 20 characters and must be unique.</li>
+          <li>Winning and losing teams cannot be the same team.</li>
+          <li>Tie-breaker points are limited to a max of 7 digits.</li>
+          <li>Live Tournament Safety: Refreshing or reloading the page will lose all data.</li>
+          <li>Click &apos;End Tournament&apos; when all matches finish to crown the winner.</li>
         </ol>
         <p>
-          Have Fun || All the Best to Every Team
+          Good luck to all teams!
         </p>
         <div className="functionality">
           <button id='end' onClick={endTournament}>End Tournament</button>
