@@ -12,6 +12,16 @@ type TeamStats = {
 
 let Teams: TeamStats[] = []
 let winPointsRule: number = 2;
+let tournamentTitle: string = "My Tournament Leaderboard";
+
+export const getTournamentName = (): string => {
+    return tournamentTitle;
+}
+
+export const setTournamentName = (name: string) => {
+    const trimmed = name.trim().slice(0, 30);
+    tournamentTitle = trimmed || "My Tournament Leaderboard";
+}
 
 export const getWinPoints = (): number => {
     return winPointsRule;
@@ -21,7 +31,7 @@ export const setWinPoints = (pts: number) => {
     if (isNaN(pts) || pts < 1) {
         winPointsRule = 2;
     } else {
-        winPointsRule = Math.min(999, Math.floor(pts));
+        winPointsRule = Math.min(9999999, Math.floor(pts));
     }
 }
 
@@ -117,6 +127,7 @@ export const canEndTournament = (): { allowed: boolean; message?: string } => {
 
 export const exportTournamentData = () => {
     const data = {
+        tournamentName: tournamentTitle,
         winPoints: winPointsRule,
         teams: Teams
     };
@@ -125,7 +136,14 @@ export const exportTournamentData = () => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'leaderboard_data.json';
+
+    const sanitizedFilename = tournamentTitle
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, '_')
+        .replace(/_+/g, '_')
+        .replace(/^_+|_+$/g, '');
+
+    link.download = sanitizedFilename ? `${sanitizedFilename}_leaderboard.json` : 'leaderboard_data.json';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -148,8 +166,12 @@ export const importTournamentData = (parsedData: any): boolean => {
         return false;
     }
 
+    if (typeof parsedData.tournamentName === 'string' && parsedData.tournamentName.trim()) {
+        setTournamentName(parsedData.tournamentName);
+    }
+
     if (typeof parsedData.winPoints === 'number' && parsedData.winPoints > 0) {
-        winPointsRule = Math.floor(parsedData.winPoints);
+        winPointsRule = Math.min(9999999, Math.floor(parsedData.winPoints));
     }
 
     Teams.sort((a: TeamStats, b: TeamStats): number => {

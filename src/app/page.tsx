@@ -8,7 +8,7 @@ import Settings from '@/components/Settings'
 import { ToastContainer, Bounce } from 'react-toastify'
 import "react-toastify/ReactToastify.css"
 import '@/styles/global.css'
-import { AllTeams, addTeam, deleteTeam, updateTeam, getWinPoints } from '@/data/Teams'
+import { AllTeams, addTeam, deleteTeam, updateTeam, getWinPoints, getTournamentName } from '@/data/Teams'
 import Congrats from '@/components/Congrats'
 
 export default function Home() {
@@ -25,6 +25,7 @@ export default function Home() {
 
     const [Teams, setTeams] = useState<TeamStats[]>(AllTeams().map(t => ({ ...t })));
     const [winPoints, setWinPointsState] = useState(getWinPoints());
+    const [tournamentName, setTournamentNameState] = useState(getTournamentName());
     const [activeTab, setActiveTab] = useState<'leaderboard' | 'sidebar'>('leaderboard');
 
     useEffect(() => {
@@ -59,11 +60,12 @@ export default function Home() {
     const handleDataImported = () => {
         setTeams(AllTeams().map(t => ({ ...t })));
         setWinPointsState(getWinPoints());
+        setTournamentNameState(getTournamentName());
     }
 
     return (
         <>
-            <Heading />
+            <Heading title={tournamentName} />
             <div className="mobile-tabs">
                 <button
                     className={activeTab === 'leaderboard' ? 'tab-btn active' : 'tab-btn'}
@@ -90,6 +92,7 @@ export default function Home() {
             <Settings 
                 onDataImported={handleDataImported} 
                 onWinPointsChange={(pts) => setWinPointsState(pts)}
+                onTournamentNameChange={(name) => setTournamentNameState(name)}
             />
             <Congrats />
             <ToastContainer

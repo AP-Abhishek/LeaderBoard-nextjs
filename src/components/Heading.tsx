@@ -3,12 +3,19 @@ import Navbar from './Navbar';
 import Image from 'next/image';
 import Logo from '../../public/winner.png'
 
-export default function Heading() {
+interface HeadingProps {
+    title: string;
+}
+
+export default function Heading({ title }: HeadingProps) {
     return (
         <div className='main-head'>
-            <div className="head">
+            <div className="app-brand">
                 <Image src={Logo} alt='Logo' id='logo'></Image>
-                <h1 id='title'>LeaderBoard</h1>
+                <span id='app-name'>LeaderBoard</span>
+            </div>
+            <div className="tournament-title-container">
+                <h1 id='title'>{title}</h1>
             </div>
             <Navbar/>
         </div>

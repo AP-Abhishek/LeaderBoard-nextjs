@@ -38,30 +38,52 @@ body {
     flex-shrink: 0;
     display: flex;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.85);
     justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.85);
     padding: 0 16px;
+    position: relative;
 }
 
-.head {
+.app-brand {
     display: flex;
     align-items: center;
-    justify-content: center;
+    z-index: 2;
 }
 
 #logo {
-    width: 38px;
-    height: 38px;
+    width: 34px;
+    height: 34px;
     margin-right: 8px;
 }
 
-#title {
-    font-size: 1.6rem;
+#app-name {
+    font-size: 1.4rem;
+    font-weight: bold;
     color: white;
+}
+
+.tournament-title-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 1;
+    pointer-events: none;
+    max-width: 40%;
+}
+
+#title {
+    font-size: 1.35rem;
+    color: #00ffea;
+    text-shadow: 0px 0px 8px rgba(0, 255, 234, 0.5);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .navbar {
     margin: 0;
+    z-index: 2;
 }
 
 .navbar ul {
@@ -793,18 +815,26 @@ td {
     }
 
     .main-head {
-        height: 50px;
-        padding: 0 10px;
-    }
-
-    #title {
-        font-size: 1.15rem;
+        height: 52px;
+        padding: 0 8px;
     }
 
     #logo {
-        width: 28px;
-        height: 28px;
+        width: 26px;
+        height: 26px;
         margin-right: 4px;
+    }
+
+    #app-name {
+        font-size: 0.95rem;
+    }
+
+    .tournament-title-container {
+        max-width: 35%;
+    }
+
+    #title {
+        font-size: 0.88rem;
     }
 
     .navbar ul {

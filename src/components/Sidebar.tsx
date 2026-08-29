@@ -75,7 +75,7 @@ export default function SideBar({ onAddTeam, onDeleteTeam, onUpdateTeam, winPoin
           <li>Team names are limited to 20 characters and must be unique.</li>
           <li>Winning and losing teams cannot be the same team.</li>
           <li>Tie-breaker points are limited to a max of 7 digits.</li>
-          <li>Use Settings to customize Win Points or Export/Import JSON data.</li>
+          <li>Use Settings to customize Tournament Name, Win Points, or Export/Import JSON data.</li>
           <li>Live Safety: Refreshing or reloading the page will lose active data.</li>
           <li>Click &apos;End Tournament&apos; when all matches finish to crown the winner.</li>
         </ol>
