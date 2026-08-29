@@ -1,38 +1,34 @@
 "use client"
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import $ from 'jquery'
 
 export default function Navbar() {
 
-  useEffect(() => {
+  const handleAddClick = () => {
+    $('.delTeam, .updatepts').slideUp(200);
+    $('.addTeam').slideToggle(300);
+    $('.cancel').slideDown(300);
+  };
 
-    const at = document.getElementById('add-team');
-    const dt = document.getElementById('delete-team');
-    const up = document.getElementById('update-pts');
+  const handleDeleteClick = () => {
+    $('.addTeam, .updatepts').slideUp(200);
+    $('.delTeam').slideToggle(300);
+    $('.cancel').slideDown(300);
+  };
 
-    at?.addEventListener("click", () => {
-      $('.addTeam').slideDown(1000);
-      $('.cancel').slideDown(1000);
-    });
-
-    dt?.addEventListener("click", () => {
-      $('.delTeam').slideDown(1000);
-      $('.cancel').slideDown(1000);
-    });
-
-    up?.addEventListener("click", () => {
-      $('.updatepts').slideDown(1000);
-      $('.cancel').slideDown(1000);
-    });
-  });
+  const handleUpdateClick = () => {
+    $('.addTeam, .delTeam').slideUp(200);
+    $('.updatepts').slideToggle(300);
+    $('.cancel').slideDown(300);
+  };
 
   return (
     <div className='navbar'>
       <ul>
-        <li><button id='add-team'>Add Team</button></li>
-        <li><button id='delete-team'>Delete Team</button></li>
-        <li><button id='update-pts'>Update Points</button></li>
+        <li><button id='add-team' onClick={handleAddClick}>Add</button></li>
+        <li><button id='delete-team' onClick={handleDeleteClick}>Delete</button></li>
+        <li><button id='update-pts' onClick={handleUpdateClick}>Update</button></li>
       </ul>
     </div>
   )
