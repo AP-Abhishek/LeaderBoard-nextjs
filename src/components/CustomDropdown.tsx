@@ -39,7 +39,7 @@ export default function CustomDropdown({ options, value, onChange, placeholder =
   }, []);
 
   return (
-    <div className="custom-dropdown-container" ref={dropdownRef} id={id}>
+    <div className={`custom-dropdown-container ${isOpen ? 'open-dropdown' : ''}`} ref={dropdownRef} id={id}>
       <div 
         className={`custom-dropdown-header ${isOpen ? 'open' : ''}`} 
         onClick={() => setIsOpen(!isOpen)}

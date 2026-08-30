@@ -557,7 +557,28 @@ td {
 
 .addTeam,
 .delTeam,
-.updatepts,
+.updatepts {
+    position: fixed;
+    top: 60px;
+    right: 0;
+    width: 25%;
+    min-width: 280px;
+    overflow: visible;
+    box-sizing: border-box;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    background-image: linear-gradient(yellow, orange);
+    box-shadow: inset 0px 0px 12px orangered, 0 8px 24px rgba(0, 0, 0, 0.4);
+    color: black;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-radius: 0px 0px 16px 16px;
+    padding: 16px 12px;
+    z-index: 1000;
+    display: none;
+    animation: modalSlideDownIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 .settings {
     position: fixed;
     top: 60px;
@@ -760,7 +781,7 @@ td {
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-    z-index: 50;
+    z-index: 2100;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-8px) scaleY(0.95);
@@ -772,6 +793,7 @@ td {
     opacity: 1;
     visibility: visible;
     transform: translateY(0) scaleY(1);
+    z-index: 2100;
 }
 
 .custom-dropdown-item {
@@ -1157,10 +1179,24 @@ td {
     .addTeam,
     .delTeam,
     .updatepts,
-    .settings,
     .body.mobile-tab-leaderboard .addTeam,
     .body.mobile-tab-leaderboard .delTeam,
-    .body.mobile-tab-leaderboard .updatepts,
+    .body.mobile-tab-leaderboard .updatepts {
+        pointer-events: auto;
+        position: fixed !important;
+        top: 130px !important;
+        left: 5% !important;
+        right: auto !important;
+        width: 90% !important;
+        min-width: auto !important;
+        overflow: visible !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+        z-index: 1000 !important;
+        border-right: 2px solid black !important;
+    }
+
+    .settings,
     .body.mobile-tab-leaderboard .settings {
         pointer-events: auto;
         position: fixed !important;
