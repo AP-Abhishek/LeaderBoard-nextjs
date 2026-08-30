@@ -1,10 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Itim&family=Playwrite+HU:wght@100..400&family=Sacramento&display=swap");
 
-*, input, button, select, textarea {
+*,
+*::before,
+*::after,
+input,
+button,
+select,
+textarea {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: inherit;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+*::-webkit-scrollbar,
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+div::-webkit-scrollbar,
+section::-webkit-scrollbar,
+form::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -18,7 +38,8 @@ input[type=number] {
     appearance: textfield;
 }
 
-html, body {
+html,
+body {
     width: 100%;
     height: 100vh;
     height: 100svh;
@@ -42,6 +63,7 @@ body {
     background-color: rgba(0, 0, 0, 0.85);
     padding: 0 16px;
     position: relative;
+    z-index: 50;
 }
 
 .app-brand {
@@ -86,6 +108,12 @@ body {
     z-index: 2;
 }
 
+.mobile-tournament-banner {
+    display: none;
+    position: relative;
+    z-index: 49;
+}
+
 .navbar ul {
     list-style: none;
     display: flex;
@@ -95,71 +123,64 @@ body {
 }
 
 .navbar ul li {
-    border-radius: 16px;
+    border-radius: 20px;
+    transition: all 0.15s ease-in-out;
 }
 
 .navbar ul li button {
-    height: 36px;
-    width: 90px;
-    font-size: 0.9rem;
+    height: 38px;
+    min-width: 72px;
+    font-size: 0.95rem;
     font-weight: bold;
-    padding: 2px 4px;
-    border-radius: 16px;
-    background: transparent;
-    border: 3px solid transparent;
-    outline: none;
-    transition: all 0.15s ease-in-out;
+    border: none;
+    border-radius: 20px;
+    color: white;
     cursor: pointer;
-}
-
-.navbar ul li button:hover {
-    transform: scale(1.03);
+    transition: all 0.15s ease-in-out;
+    padding: 4px 12px;
+    border: 2.5px solid transparent;
 }
 
 .navbar ul li button:active {
-    transform: scale(0.95);
+    transform: scale(0.92);
 }
 
-.navbar ul li.nav-add {
+.navbar ul li.nav-add button {
     background-color: rgb(0, 255, 0);
+    color: black;
 }
 
 .navbar ul li.nav-add button:hover {
-    border: 3px solid rgb(166, 255, 114);
-}
-
-.navbar ul li.nav-del {
-    background-color: rgb(255, 0, 0);
-    color: white;
+    background-color: greenyellow;
+    border: 2.5px solid rgb(166, 255, 114);
 }
 
 .navbar ul li.nav-del button {
-    color: white;
+    background-color: red;
 }
 
 .navbar ul li.nav-del button:hover {
-    border: 3px solid rgb(255, 115, 0);
+    background-color: rgb(211, 0, 0);
+    border: 2.5px solid rgb(255, 115, 0);
 }
 
-.navbar ul li.nav-update {
-    background-color: rgb(0, 191, 255);
+.navbar ul li.nav-update button {
+    background-color: deepskyblue;
+    color: black;
 }
 
 .navbar ul li.nav-update button:hover {
-    border: 3px solid rgb(173, 216, 230);
-}
-
-.navbar ul li.nav-settings {
-    background-color: rgb(186, 85, 211);
-    color: white;
+    background-color: #0099cc;
+    border: 2.5px solid rgb(173, 216, 230);
 }
 
 .navbar ul li.nav-settings button {
-    color: white;
+    background-color: mediumorchid;
 }
 
 .navbar ul li.nav-settings button:hover {
-    border: 3px solid rgb(221, 160, 221);
+    background-color: #8a2be2;
+    border: 2.5px solid rgb(221, 160, 221);
 }
 
 .mobile-tabs {
@@ -174,14 +195,33 @@ body {
     overflow: hidden;
 }
 
-.table {
+.table-container {
     width: 75%;
     height: 100%;
     padding: 12px;
+    overflow: hidden;
+    display: flex;
+}
+
+.table {
+    width: 100%;
+    height: 100%;
+    padding: 0;
     overflow-y: auto;
     overflow-x: auto;
-    scrollbar-width: thin;
-    scrollbar-color: darkcyan rgba(0, 0, 0, 0.15);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.table,
+.sidebar,
+#congrats-message,
+.addTeam,
+.delTeam,
+.updatepts,
+.settings {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 .table::-webkit-scrollbar,
@@ -189,34 +229,17 @@ body {
 #congrats-message::-webkit-scrollbar,
 .addTeam::-webkit-scrollbar,
 .delTeam::-webkit-scrollbar,
-.updatepts::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+.updatepts::-webkit-scrollbar,
+.settings::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
 }
 
-.table::-webkit-scrollbar-track,
-.sidebar::-webkit-scrollbar-track,
-#congrats-message::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.15);
-    border-radius: 4px;
-}
-
-.table::-webkit-scrollbar-thumb,
-.sidebar::-webkit-scrollbar-thumb,
-#congrats-message::-webkit-scrollbar-thumb {
-    background: darkcyan;
-    border-radius: 4px;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-}
-
-.table::-webkit-scrollbar-thumb:hover,
-.sidebar::-webkit-scrollbar-thumb:hover {
-    background: #005b5c;
-}
-
-.sidebar, #congrats-message {
-    scrollbar-width: thin;
-    scrollbar-color: darkcyan rgba(0, 0, 0, 0.15);
+.sidebar,
+#congrats-message {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 #points-table {
@@ -241,9 +264,11 @@ body {
     0% {
         box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.9);
     }
+
     50% {
         box-shadow: inset 0 0 24px rgba(255, 215, 0, 0.95);
     }
+
     100% {
         box-shadow: none;
     }
@@ -333,7 +358,7 @@ body {
 
 .overview-label {
     font-weight: bold;
-    color: black;
+    color: #111;
 }
 
 .overview-value {
@@ -400,6 +425,30 @@ body {
     transform: scale(0.95);
 }
 
+.app-footer-credit {
+    width: 100%;
+    height: 24px;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: rgba(255, 255, 255, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.76rem;
+    font-weight: bold;
+    flex-shrink: 0;
+    z-index: 50;
+    user-select: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+#points-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: darkcyan;
+    color: lavenderblush;
+}
+
 .table-head {
     height: 38px;
     background-color: darkcyan;
@@ -438,6 +487,7 @@ td {
         opacity: 0;
         transform: translateY(-15px) scale(0.97);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0) scale(1);
@@ -449,29 +499,85 @@ td {
         opacity: 0;
         transform: translate(-50%, -45%) scale(0.88);
     }
+
     100% {
         opacity: 1;
         transform: translate(-50%, -50%) scale(1);
     }
 }
 
+.cancel {
+    position: absolute;
+    top: 6px;
+    right: 12px;
+    border: 1px solid red;
+    border-radius: 50%;
+    padding: 2px 8px;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.85rem;
+    z-index: 10;
+}
+
+.cancel:hover {
+    background-color: darkred;
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.popup.hidden {
+    display: none;
+}
+
+.popup-card {
+    background-image: linear-gradient(135deg, gold 0%, orange 100%);
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 15px orangered;
+    border: 3px solid black;
+    border-radius: 20px;
+    padding: 28px 24px;
+    width: 90%;
+    max-width: 440px;
+    position: relative;
+    text-align: center;
+    animation: popupPopIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
 .addTeam,
 .delTeam,
 .updatepts,
 .settings {
-    position: absolute;
-    top: 0;
-    left: 5%;
-    width: 90%;
+    position: fixed;
+    top: 60px;
+    right: 0;
+    width: 25%;
+    min-width: 280px;
+    max-height: calc(100vh - 75px);
+    max-height: calc(100svh - 75px);
+    overflow-y: auto;
+    box-sizing: border-box;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     background-image: linear-gradient(yellow, orange);
-    box-shadow: inset 0px 0px 12px orangered;
+    box-shadow: inset 0px 0px 12px orangered, 0 8px 24px rgba(0, 0, 0, 0.4);
     color: black;
     border-bottom: 2px solid black;
     border-left: 2px solid black;
-    border-right: 2px solid black;
     border-radius: 0px 0px 16px 16px;
-    padding: 20px 16px;
-    z-index: 100;
+    padding: 16px 12px;
+    z-index: 1000;
     display: none;
     animation: modalSlideDownIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -492,11 +598,11 @@ td {
 .delTeam form label,
 .updatepts label,
 .settings label {
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: bold;
     text-align: center;
-    margin-top: 10px;
-    margin-bottom: 5px;
+    margin-top: 8px;
+    margin-bottom: 4px;
 }
 
 .addTeam form input,
@@ -507,19 +613,21 @@ td {
 .updatepts select,
 .settings input {
     height: 38px;
-    width: 88%;
+    width: 88% !important;
+    box-sizing: border-box !important;
     border: 1.5px solid black;
     border-radius: 8px;
     text-align: center;
-    font-size: 0.98rem;
+    font-size: 0.95rem;
     padding: 4px 8px;
-    margin: 5px 0;
+    margin: 4px auto !important;
     background-color: rgba(255, 255, 255, 0.95);
+    display: block;
 }
 
 .settings h3 {
-    font-size: 1.3rem;
-    margin-bottom: 8px;
+    font-size: 1.25rem;
+    margin-bottom: 6px;
     text-align: center;
 }
 
@@ -528,13 +636,54 @@ td {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 12px;
-    padding-top: 12px;
+    margin-top: 10px;
+    padding-top: 10px;
     border-top: 1.5px dashed black;
+}
+
+.main-head {
+    width: 100%;
+    height: 60px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #000000;
+    padding: 0 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.submit,
+.export-btn,
+.import-label {
+    height: 38px !important;
+    width: 88% !important;
+    max-width: 88% !important;
+    box-sizing: border-box !important;
+    border: 2px solid black !important;
+    border-radius: 8px !important;
+    font-size: 0.95rem !important;
+    font-weight: bold !important;
+    margin: 6px auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+    user-select: none;
+}
+
+.submit {
+    background-color: springgreen;
+    color: black;
 }
 
 .export-btn {
     background-color: deepskyblue !important;
+    color: black !important;
 }
 
 .export-btn:hover {
@@ -542,22 +691,8 @@ td {
 }
 
 .import-label {
-    margin-top: 12px;
-    height: 40px;
-    width: 70%;
-    border: 2px solid black;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: bold;
     background-color: springgreen;
     color: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.15s ease-in-out;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
 }
 
 .import-label:hover {
@@ -815,14 +950,25 @@ td {
     }
 
     .main-head {
-        height: 52px;
-        padding: 0 8px;
+        height: 50px;
+        padding: 0 10px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background-color: #000000 !important;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .app-brand {
+        flex-shrink: 0;
     }
 
     #logo {
         width: 26px;
         height: 26px;
-        margin-right: 4px;
+        margin-right: 6px;
     }
 
     #app-name {
@@ -830,11 +976,39 @@ td {
     }
 
     .tournament-title-container {
-        max-width: 35%;
+        display: none;
     }
 
-    #title {
-        font-size: 0.88rem;
+    .mobile-tournament-banner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 38px;
+        position: sticky;
+        top: 50px;
+        z-index: 99;
+        background-color: #000000 !important;
+        border-top: 1.5px solid rgba(0, 255, 234, 0.25);
+        border-bottom: 1.5px solid rgba(0, 255, 234, 0.25);
+        padding: 4px 16px;
+    }
+
+    .mobile-tournament-banner h2 {
+        font-size: 1.08rem;
+        color: #00ffea;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-shadow: 0px 0px 10px rgba(0, 255, 234, 0.6);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-align: center;
+        margin: 0;
+    }
+
+    .navbar {
+        flex-shrink: 0;
     }
 
     .navbar ul {
@@ -842,17 +1016,17 @@ td {
     }
 
     .navbar ul li {
-        border-radius: 14px;
+        border-radius: 12px;
     }
 
     .navbar ul li button {
-        height: 34px;
-        min-width: 60px;
+        height: 32px;
+        min-width: 50px;
         width: auto;
-        font-size: 0.82rem;
-        padding: 2px 8px;
-        border-radius: 14px;
-        border: 2.5px solid transparent;
+        font-size: 0.78rem;
+        padding: 2px 6px;
+        border-radius: 12px;
+        border: 2px solid transparent;
     }
 
     .navbar ul li.nav-add button:hover {
@@ -875,7 +1049,10 @@ td {
         display: flex;
         width: 100%;
         height: 42px;
-        background-color: rgba(0, 0, 0, 0.9);
+        position: sticky;
+        top: 88px;
+        z-index: 98;
+        background-color: #000000 !important;
         padding: 4px 6px;
         gap: 6px;
     }
@@ -904,10 +1081,18 @@ td {
     }
 
     .submit {
-        height: 42px;
-        width: 80%;
-        font-size: 1.02rem;
+        height: 38px;
+        width: 88%;
+        font-size: 0.95rem;
         border-radius: 8px;
+    }
+
+    .import-label {
+        height: 38px;
+        width: 88%;
+        font-size: 0.95rem;
+        border-radius: 8px;
+        margin-top: 8px;
     }
 
     .functionality button {
@@ -924,12 +1109,20 @@ td {
     }
 
     .body {
-        height: calc(100vh - 92px);
-        height: calc(100svh - 92px);
+        height: calc(100vh - 154px);
+        height: calc(100svh - 154px);
         display: flex;
         width: 100%;
         overflow: hidden;
         position: relative;
+    }
+
+    .body.mobile-tab-leaderboard .table-container {
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 6px;
+        overflow: hidden;
     }
 
     .body.mobile-tab-leaderboard .table {
@@ -938,7 +1131,7 @@ td {
         height: 100%;
         overflow-y: auto;
         overflow-x: auto;
-        padding: 6px;
+        padding: 0;
     }
 
     .body.mobile-tab-leaderboard .sidebar {
@@ -961,16 +1154,32 @@ td {
         display: none !important;
     }
 
+    .addTeam,
+    .delTeam,
+    .updatepts,
+    .settings,
     .body.mobile-tab-leaderboard .addTeam,
     .body.mobile-tab-leaderboard .delTeam,
     .body.mobile-tab-leaderboard .updatepts,
     .body.mobile-tab-leaderboard .settings {
         pointer-events: auto;
-        position: absolute;
-        top: 0;
-        left: 5%;
-        width: 90%;
-        z-index: 100;
+        position: fixed !important;
+        top: 130px !important;
+        left: 5% !important;
+        right: auto !important;
+        width: 90% !important;
+        min-width: auto !important;
+        max-height: calc(100vh - 160px) !important;
+        max-height: calc(100svh - 160px) !important;
+        overflow-y: auto !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+        z-index: 1000 !important;
+        border-right: 2px solid black !important;
+    }
+
+    .body.mobile-tab-sidebar .table-container {
+        display: none !important;
     }
 
     .body.mobile-tab-sidebar .table {
@@ -1012,13 +1221,33 @@ td {
         z-index: 5;
     }
 
-    #points-table tr th:nth-child(1) { width: 12%; }
-    #points-table tr th:nth-child(2) { width: 34%; }
-    #points-table tr th:nth-child(3) { width: 10.8%; }
-    #points-table tr th:nth-child(4) { width: 10.8%; }
-    #points-table tr th:nth-child(5) { width: 10.8%; }
-    #points-table tr th:nth-child(6) { width: 10.8%; }
-    #points-table tr th:nth-child(7) { width: 10.8%; }
+    #points-table tr th:nth-child(1) {
+        width: 12%;
+    }
+
+    #points-table tr th:nth-child(2) {
+        width: 34%;
+    }
+
+    #points-table tr th:nth-child(3) {
+        width: 10.8%;
+    }
+
+    #points-table tr th:nth-child(4) {
+        width: 10.8%;
+    }
+
+    #points-table tr th:nth-child(5) {
+        width: 10.8%;
+    }
+
+    #points-table tr th:nth-child(6) {
+        width: 10.8%;
+    }
+
+    #points-table tr th:nth-child(7) {
+        width: 10.8%;
+    }
 
     .table-head {
         height: 32px;
