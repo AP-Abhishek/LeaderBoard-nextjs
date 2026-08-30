@@ -89,6 +89,9 @@ export default function Home() {
                     winPoints={winPoints}
                 />
             </div>
+            <footer className="app-footer-credit">
+                <p>&copy; {new Date().getFullYear()} Leaderboard &bull; A product by <b>A. P. Abhishek</b></p>
+            </footer>
             <Settings 
                 onDataImported={handleDataImported} 
                 onWinPointsChange={(pts) => setWinPointsState(pts)}
